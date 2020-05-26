@@ -4,7 +4,7 @@ import inc.def.*;
 
 public class Session {
     static Object loggedIn;
-
+    //buna ziua
     Session(){}
 
     public static Object getLoggedIn() {
