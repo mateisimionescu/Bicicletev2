@@ -24,10 +24,11 @@ public class LoginGUI extends JFrame{
     JLabel lblNume = new JLabel("Username:");
     JLabel lblParola = new JLabel ("Password:");
     JTextField txtUser = new JTextField(30);
-    JTextField txtPass = new JPasswordField(30);
+    JPasswordField txtPass = new JPasswordField(30);
     JButton btnLoginC = new JButton("Company Login");
     JButton btnLoginU = new JButton("User Login");
     JButton btnRegisterU=new JButton("User Register");
+    JButton btnRegisterC=new JButton("Company Register");
 
 
     static void CompAdd(Component comp, int x, int y, int w, int h){
@@ -53,21 +54,31 @@ public class LoginGUI extends JFrame{
 
         CompAdd(lblNume, 0, 2, 1, 1);
         CompAdd(lblParola, 0, 3, 1, 1);
-        CompAdd(txtUser, 1, 2, 2, 1);
-        CompAdd(txtPass, 1, 3, 2, 1);
+        CompAdd(txtUser, 1, 2, 1, 1);
+        CompAdd(txtPass, 1, 3, 1, 1);
 
-        //gbcons.fill = GridBagConstraints.HORIZONTAL;
+        gbcons.fill = GridBagConstraints.HORIZONTAL;
        // CompAdd(btnLoginU, 0, 3, 0, 0);
-        CompAdd(btnRegisterU,0,4,0,0);
+        CompAdd(btnLoginU,0,4,2,1);
+        gbcons.fill = GridBagConstraints.HORIZONTAL;
+        CompAdd(btnRegisterU,0,5,2,1);
+        gbcons.fill = GridBagConstraints.HORIZONTAL;
+        CompAdd(btnLoginC,0,6,2,1);
+        gbcons.fill = GridBagConstraints.HORIZONTAL;
+        CompAdd(btnRegisterC,0,7,2,1);
+
         btnRegisterU.setName("ruser");
-        btnLoginU.setName("inc.def.user");
-        btnLoginU.addActionListener(lForButton);
+        btnLoginU.setName("user");
+
 
 
         //gbcons.fill = GridBagConstraints.HORIZONTAL;
         //CompAdd(btnLoginC, 0, 10, 0, 0);
-        btnLoginC.setName("inc.def.company");
+        btnLoginC.setName("company");
         btnLoginC.addActionListener(lForButton);
+        btnLoginU.addActionListener(lForButton);
+        btnRegisterU.addActionListener(lForButton);
+        btnRegisterC.addActionListener(lForButton);
 
 
         LoginWindow.setSize(new Dimension(500, 500));
@@ -107,36 +118,35 @@ public class LoginGUI extends JFrame{
 
         @Override
         public void actionPerformed(ActionEvent e) {
+            if(!txtUser.getText().isEmpty() && !txtPass.getPassword().toString().isEmpty()) {
+                if (e.getSource() == btnLoginU) {
+                    if (ServerAuth(btnLoginU.getName()) == true) ;
+                    {
+                        dispose();
+                        UserGUI ug = new UserGUI();
+                        ug.LoginWindow.setTitle("UserGUI");
+                        LoginWindow.setVisible(false);
+                    }
+                }
 
-            if (e.getSource() == btnLoginU)
-            {
-                if(ServerAuth(btnLoginU.getName())==true);
-                {
-                    dispose();
-                    UserGUI ug = new UserGUI();
-                    ug.LoginWindow.setTitle("UserGUI");
-                    LoginWindow.setVisible(false);
+                if (e.getSource() == btnLoginC) {
+                    if (ServerAuth(btnLoginC.getName()) == true) ;
+                    {
+                        dispose();
+                        CompanyGUI cg = new CompanyGUI();
+                        cg.LoginWindow.setTitle("CompanyGUI");
+                        LoginWindow.setVisible(false);
+                    }
                 }
             }
 
-            if (e.getSource() == btnLoginC)
-            {
-                if(ServerAuth(btnLoginC.getName())==true);
-                {
+                if (e.getSource() == btnRegisterU) {
                     dispose();
-                    CompanyGUI cg = new CompanyGUI();
-                    cg.LoginWindow.setTitle("CompanyGUI");
+                    RegisterU ru = new RegisterU();
+                    ru.LoginWindow.setTitle("Register User");
                     LoginWindow.setVisible(false);
                 }
-            }
 
-            if(e.getSource()==btnRegisterU)
-            {
-                dispose();
-                RegisterU  ru=new RegisterU();
-                ru.LoginWindow.setTitle("Register User");
-                LoginWindow.setVisible(false);
-            }
 
         }
     }

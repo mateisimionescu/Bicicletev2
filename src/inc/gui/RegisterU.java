@@ -17,6 +17,7 @@ public class RegisterU extends JFrame{
     static GridBagConstraints gbcons = new GridBagConstraints();
 
     JButton registerUser=new JButton("register");
+    JButton backToLogin=new JButton("Back to Login");
     JLabel lname=new JLabel("Name:");
     JLabel lemail=new JLabel("Email:");
     JLabel lphone=new JLabel("Phone:");
@@ -65,9 +66,12 @@ public class RegisterU extends JFrame{
 
         gbcons.fill = GridBagConstraints.HORIZONTAL;
         CompAdd(registerUser,0,8,2,2);
+        CompAdd(backToLogin,0,10,2,2);
         registerUser.setName("Inregistrare");
+        backToLogin.setName("BackToLogin");
 
         registerUser.addActionListener(listenForButton);
+        backToLogin.addActionListener(listenForButton);
 
 
 
@@ -81,10 +85,19 @@ public class RegisterU extends JFrame{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(!filledData())
-                    test.setText("Date necompletate");
-            else
-                    test.setText("Inregistrat!");
+            if (e.getSource() == registerUser)
+                if(!filledData())
+                        test.setText("Date necompletate");
+                else
+                        test.setText("Inregistrat!");
+
+             if(e.getSource() == backToLogin)
+             {
+                 dispose();
+                 LoginGUI lg = new LoginGUI();
+                 lg.LoginWindow.setTitle("Login GUI");
+                 LoginWindow.setVisible(false);
+             }
 
         }
     }
