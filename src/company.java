@@ -1,6 +1,7 @@
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
+import inc.conn.DBconn;
 
 public class company {
     private int id_company;

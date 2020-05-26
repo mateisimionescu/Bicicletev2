@@ -2,20 +2,16 @@ package inc.gui;
 
 
 import com.mysql.cj.log.Log;
-import inc.conn.DBconn;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LoginGUI extends JFrame{
-
+public class UserGUI extends JFrame{
 
     static JFrame LoginWindow = new JFrame("Login Bikerino");
     static GridBagLayout gridBag = new GridBagLayout();
     static GridBagConstraints gbcons = new GridBagConstraints();
-
 
     JLabel lblLogin = new JLabel("Bikerino",JLabel.CENTER);
     JLabel lblNume = new JLabel("Username:");
@@ -24,7 +20,6 @@ public class LoginGUI extends JFrame{
     JTextField txtPass = new JPasswordField(30);
     JButton btnLoginC = new JButton("Company Login");
     JButton btnLoginU = new JButton("User Login");
-
 
     static void CompAdd(Component comp, int x, int y, int w, int h){
         gbcons.gridx = x;
@@ -36,7 +31,9 @@ public class LoginGUI extends JFrame{
     }
 
 
-    public LoginGUI() {
+
+
+    public UserGUI() {
 
         ListenForButton lForButton = new ListenForButton();
         gbcons.weightx = 0.5;
@@ -54,13 +51,11 @@ public class LoginGUI extends JFrame{
 
         gbcons.fill = GridBagConstraints.HORIZONTAL;
         CompAdd(btnLoginU, 0, 4, 0, 1);
-        btnLoginU.setName("user");
         btnLoginU.addActionListener(lForButton);
 
 
         gbcons.fill = GridBagConstraints.HORIZONTAL;
         CompAdd(btnLoginC, 0, 5, 0, 0);
-        btnLoginC.setName("company");
         btnLoginC.addActionListener(lForButton);
 
 
@@ -69,33 +64,18 @@ public class LoginGUI extends JFrame{
         LoginWindow.setVisible(true);
     }
 
-    String ServerAuth(String Table)
-    {
-        DBconn connection = new DBconn();
-        String tempUser = txtUser.getText();
-        String tempPass = txtPass.getText();
-        System.out.println(Table);
-        return "Fail!";
-    }
-
-
     private class ListenForButton implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
             if (e.getSource() == btnLoginU)
             {
 
-                ServerAuth(btnLoginU.getName());
-
+                System.out.println("U button");
             }
-
             if (e.getSource() == btnLoginC)
             {
-
-                ServerAuth(btnLoginC.getName());
-
+                System.out.println("C button");
             }
 
         }

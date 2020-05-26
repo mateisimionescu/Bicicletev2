@@ -1,3 +1,4 @@
+package inc.conn;
 import java.sql.*;
 
 public class DBconn{

@@ -1,5 +1,7 @@
 import java.sql.*;
 import java.util.Scanner;
+import inc.conn.DBconn;
+
 
 public class user {
     private int id_user;

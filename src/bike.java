@@ -1,6 +1,7 @@
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
+import inc.conn.DBconn;
 
 public class bike {
     private int id_bike;
