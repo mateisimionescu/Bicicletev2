@@ -118,38 +118,34 @@ public class LoginGUI extends JFrame{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(!txtUser.getText().isEmpty() && !txtPass.getText().isEmpty()) {
+            if (!txtUser.getText().isEmpty() && !txtPass.getText().isEmpty()) {
                 if (e.getSource() == btnLoginU) {
-                    if (ServerAuth(btnLoginU.getName()) == true)
-                    {
+                    if (ServerAuth(btnLoginU.getName()) == true) {
                         dispose();
                         UserGUI ug = new UserGUI();
                         ug.LoginWindow.setTitle("UserGUI");
                         LoginWindow.setVisible(false);
-                    }
-                    else JOptionPane.showMessageDialog(LoginWindow, "Invalid username/password");
+                    } else JOptionPane.showMessageDialog(LoginWindow, "Invalid username/password");
 
 
                 }
 
                 if (e.getSource() == btnLoginC) {
-                    if (ServerAuth(btnLoginC.getName()) == true)
-                    {
+                    if (ServerAuth(btnLoginC.getName()) == true) {
                         dispose();
                         CompanyGUI cg = new CompanyGUI();
                         cg.LoginWindow.setTitle("CompanyGUI");
                         LoginWindow.setVisible(false);
-                    }
-                    else  JOptionPane.showMessageDialog(LoginWindow, "Invalid username/password");
+                    } else JOptionPane.showMessageDialog(LoginWindow, "Invalid username/password");
                 }
             }
 
-                if (e.getSource() == btnRegisterU) {
-                    dispose();
-                    RegisterU ru = new RegisterU();
-                    ru.LoginWindow.setTitle("Register User");
-                    LoginWindow.setVisible(false);
-                }
+            if (e.getSource() == btnRegisterU) {
+                dispose();
+                RegisterU ru = new RegisterU();
+                ru.LoginWindow.setTitle("Register User");
+                LoginWindow.setVisible(false);
+            }
 
             if (e.getSource() == btnRegisterC) {
                 dispose();

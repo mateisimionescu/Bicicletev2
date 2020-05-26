@@ -99,8 +99,7 @@ public class RegisterC extends JFrame{
             if(e.getSource() == backToLogin)
             {
                 dispose();
-                LoginGUI lg = new LoginGUI();
-                lg.LoginWindow.setTitle("Login GUI");
+                LoginGUI.LoginWindow.setVisible(true);
                 LoginWindow.setVisible(false);
             }
 
