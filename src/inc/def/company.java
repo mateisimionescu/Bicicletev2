@@ -6,14 +6,14 @@ import java.sql.SQLException;
 import java.util.Scanner;
 import inc.conn.DBconn;
 
-public class company {
+public class company extends Account {
     private int id_company;
-    private String username;
-    private String password;
-    private String name;
-    private String email;
-    private String phone;
+
     private String address;
+
+    public String getUsername() {
+        return username;
+    }
 
     public void companyInit() {
         System.out.println(this.getClass().getName());

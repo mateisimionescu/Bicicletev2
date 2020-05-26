@@ -3,11 +3,10 @@ package inc.conn;
 import inc.def.*;
 
 public class Session {
-    static Object loggedIn;
-    //buna ziua
+    static Account loggedIn;
     Session(){}
 
-    public static Object getLoggedIn() {
+    public static Account getLoggedIn() {
         return loggedIn;
     }
 
