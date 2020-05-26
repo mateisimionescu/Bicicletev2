@@ -42,6 +42,11 @@ public class company extends Account {
         address=address_;
     }
 
+    public int getId()
+    {
+        return id_company;
+    }
+
     public void setDB(String username_, String password_)
     {
         DBconn connection = new DBconn();

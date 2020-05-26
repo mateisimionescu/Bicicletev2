@@ -923,134 +923,129 @@
       <DataType>int|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="292" parent="283" name="PRIMARY">
+    <column id="292" parent="283" name="is_rented">
+      <Position>6</Position>
+      <DataType>tinyint(1)|0s</DataType>
+      <DefaultExpression>0</DefaultExpression>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="293" parent="283" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id_bike</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="293" parent="284" name="id_company">
+    <column id="294" parent="284" name="id_company">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="294" parent="284" name="username">
+    <column id="295" parent="284" name="username">
       <Position>2</Position>
       <DataType>varchar(25)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="295" parent="284" name="password">
+    <column id="296" parent="284" name="password">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="296" parent="284" name="name">
+    <column id="297" parent="284" name="name">
       <Position>4</Position>
       <DataType>varchar(50)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="297" parent="284" name="email">
+    <column id="298" parent="284" name="email">
       <Position>5</Position>
       <DataType>varchar(50)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="298" parent="284" name="phone">
+    <column id="299" parent="284" name="phone">
       <Position>6</Position>
       <DataType>varchar(15)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="299" parent="284" name="address">
+    <column id="300" parent="284" name="address">
       <Position>7</Position>
       <DataType>varchar(50)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="300" parent="284" name="PRIMARY">
+    <key id="301" parent="284" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id_company</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="301" parent="285" name="id_rental">
-      <Position>1</Position>
-      <DataType>varchar(25)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="302" parent="285" name="id_user">
-      <Position>2</Position>
-      <DataType>int|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="303" parent="285" name="id_bike">
-      <Position>3</Position>
-      <DataType>int|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="304" parent="285" name="rent_date">
-      <Position>4</Position>
-      <DataType>date|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="305" parent="285" name="rent_hour">
-      <Position>5</Position>
-      <DataType>time|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="306" parent="285" name="return_hour">
-      <Position>6</Position>
-      <DataType>time|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="307" parent="285" name="id_user_fk">
-      <ColNames>id_user</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="308" parent="285" name="id_bike_fk">
-      <ColNames>id_bike</ColNames>
-      <Type>btree</Type>
-    </index>
-    <foreign-key id="309" parent="285" name="id_user_fk">
-      <ColNames>id_user</ColNames>
-      <RefTableName>user</RefTableName>
-      <RefColNames>id_user</RefColNames>
-    </foreign-key>
-    <foreign-key id="310" parent="285" name="id_bike_fk">
-      <ColNames>id_bike</ColNames>
-      <RefTableName>bike</RefTableName>
-      <RefColNames>id_bike</RefColNames>
-    </foreign-key>
-    <column id="311" parent="286" name="id_user">
+    <column id="302" parent="285" name="id_rental">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="312" parent="286" name="username">
+    <column id="303" parent="285" name="id_user">
+      <Position>2</Position>
+      <DataType>int|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="304" parent="285" name="id_bike">
+      <Position>3</Position>
+      <DataType>int|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="305" parent="285" name="rent_date">
+      <Position>4</Position>
+      <DataType>date|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="306" parent="285" name="rent_hour">
+      <Position>5</Position>
+      <DataType>time|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="307" parent="285" name="return_hour">
+      <Position>6</Position>
+      <DataType>time|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="308" parent="285" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id_rental</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="309" parent="286" name="id_user">
+      <Position>1</Position>
+      <DataType>int|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="310" parent="286" name="username">
       <Position>2</Position>
       <DataType>varchar(25)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="313" parent="286" name="password">
+    <column id="311" parent="286" name="password">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="314" parent="286" name="name">
+    <column id="312" parent="286" name="name">
       <Position>4</Position>
       <DataType>varchar(50)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="315" parent="286" name="email">
+    <column id="313" parent="286" name="email">
       <Position>5</Position>
       <DataType>varchar(50)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="316" parent="286" name="phone">
+    <column id="314" parent="286" name="phone">
       <Position>6</Position>
       <DataType>varchar(15)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="317" parent="286" name="PRIMARY">
+    <key id="315" parent="286" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id_user</ColNames>
       <Primary>1</Primary>
