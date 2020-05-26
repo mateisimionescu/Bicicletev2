@@ -27,6 +27,7 @@ public class LoginGUI extends JFrame{
     JTextField txtPass = new JPasswordField(30);
     JButton btnLoginC = new JButton("Company Login");
     JButton btnLoginU = new JButton("User Login");
+    JButton btnRegisterU=new JButton("User Register");
 
 
     static void CompAdd(Component comp, int x, int y, int w, int h){
@@ -55,14 +56,16 @@ public class LoginGUI extends JFrame{
         CompAdd(txtUser, 1, 2, 2, 1);
         CompAdd(txtPass, 1, 3, 2, 1);
 
-        gbcons.fill = GridBagConstraints.HORIZONTAL;
-        CompAdd(btnLoginU, 0, 4, 0, 1);
+        //gbcons.fill = GridBagConstraints.HORIZONTAL;
+       // CompAdd(btnLoginU, 0, 3, 0, 0);
+        CompAdd(btnRegisterU,0,4,0,0);
+        btnRegisterU.setName("ruser");
         btnLoginU.setName("user");
         btnLoginU.addActionListener(lForButton);
 
 
-        gbcons.fill = GridBagConstraints.HORIZONTAL;
-        CompAdd(btnLoginC, 0, 5, 0, 0);
+        //gbcons.fill = GridBagConstraints.HORIZONTAL;
+        //CompAdd(btnLoginC, 0, 10, 0, 0);
         btnLoginC.setName("company");
         btnLoginC.addActionListener(lForButton);
 
@@ -125,6 +128,14 @@ public class LoginGUI extends JFrame{
                     cg.LoginWindow.setTitle("CompanyGUI");
                     LoginWindow.setVisible(false);
                 }
+            }
+
+            if(e.getSource()==btnRegisterU)
+            {
+                dispose();
+                RegisterU  ru=new RegisterU();
+                ru.LoginWindow.setTitle("Register User");
+                LoginWindow.setVisible(false);
             }
 
         }
