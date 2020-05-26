@@ -1,7 +1,7 @@
 package inc.gui;
 
 
-import com.mysql.cj.log.Log;
+//import com.mysql.cj.log.Log;
 import inc.conn.Session;
 
 import javax.swing.*;

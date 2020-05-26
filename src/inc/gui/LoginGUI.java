@@ -2,7 +2,7 @@ package inc.gui;
 
 
 
-import com.mysql.cj.log.Log;
+
 import inc.conn.DBconn;
 import inc.conn.Session;
 import inc.def.*;
@@ -32,7 +32,8 @@ public class LoginGUI extends JFrame{
     JButton btnLoginU = new JButton("User Login");
     JButton btnRegisterU=new JButton("User Register");
     JButton btnRegisterC=new JButton("Company Register");
-
+    user userTemp=new user();
+    company companyTemp=new company();
 
     static void CompAdd(Component comp, int x, int y, int w, int h){
         gbcons.gridx = x;
@@ -126,8 +127,8 @@ public class LoginGUI extends JFrame{
                     if (ServerAuth(btnLoginU.getName()) == true) {
                         dispose();
 
-                        user tempUser = new user();
-                        Session.setLoggedIn(tempUser);
+                        userTemp.setDB(txtUser.getText(), txtPass.getText());
+                        Session.setLoggedIn(userTemp);
 
                         UserGUI ug = new UserGUI();
                         ug.LoginWindow.setTitle("UserGUI");
@@ -141,8 +142,8 @@ public class LoginGUI extends JFrame{
                     if (ServerAuth(btnLoginC.getName()) == true) {
                         dispose();
 
-                        company tempComp = new company();
-                        Session.setLoggedIn(tempComp);
+                        companyTemp.setDB(txtUser.getText(), txtPass.getText());
+                        Session.setLoggedIn(companyTemp);
 
                         CompanyGUI cg = new CompanyGUI();
                         cg.LoginWindow.setTitle("CompanyGUI");

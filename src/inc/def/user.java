@@ -46,6 +46,37 @@ public class user {
         phone=phone_;
     }
 
+    public void setDB(String username_, String password_)
+    {
+        DBconn connection = new DBconn();
+
+
+        try {
+            String query = "SELECT id_user, username, password, name, email, phone FROM user WHERE username = ? AND password = ?;";
+
+            PreparedStatement preparedStmt = DBconn.getConnection().prepareStatement(query);
+            preparedStmt.setString(1, username_);
+            preparedStmt.setString(2, password_);
+
+            ResultSet rs = preparedStmt.executeQuery();
+            if (rs.next()) {
+                id_user=rs.getInt("id_user");
+                username=rs.getString("username");
+                password=rs.getString("password");
+                name=rs.getString("name");
+                email=rs.getString("email");
+                phone=rs.getString("phone");
+
+
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+    }
+
     public void insert() {
         System.out.println("Inserting records into the table...");
 
