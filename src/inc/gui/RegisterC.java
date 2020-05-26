@@ -30,7 +30,7 @@ public class RegisterC extends JFrame{
     JTextField temail=new JTextField(30);
     JTextField tphone=new JTextField(30);
     JTextField taddress=new JTextField(30);
-    JPasswordField tpassword=new JPasswordField(30);
+    JTextField tpassword=new JPasswordField(30);
     JLabel inregistrare=new JLabel("INREGISTRARE COMPANIE");
     JTextArea test=new JTextArea();
 
@@ -111,7 +111,7 @@ public class RegisterC extends JFrame{
     {
         DBconn connection = new DBconn();
         company temp=new company();
-        temp.set(tusername.getText(), (tpassword.getPassword()).toString(), tname.getText(),temail.getText(),tphone.getText(), taddress.getText());
+        temp.set(tusername.getText(), tpassword.getText(), tname.getText(),temail.getText(),tphone.getText(), taddress.getText());
         temp.insert();
 
     }

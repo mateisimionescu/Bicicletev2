@@ -27,7 +27,7 @@ public class RegisterU extends JFrame{
     JTextField tusername=new JTextField(30);
     JTextField temail=new JTextField(30);
     JTextField tphone=new JTextField(30);
-    JPasswordField tpassword=new JPasswordField(30);
+    JTextField tpassword=new JPasswordField(30);
     JLabel inregistrare=new JLabel("INREGISTRARE USER");
     JTextArea test=new JTextArea();
 
@@ -106,7 +106,7 @@ public class RegisterU extends JFrame{
     {
         DBconn connection = new DBconn();
         user temp=new user();
-        temp.set(tusername.getText(), (tpassword.getPassword()).toString(), tname.getText(),temail.getText(),tphone.getText());
+        temp.set(tusername.getText(), (tpassword.getText()), tname.getText(),temail.getText(),tphone.getText());
         temp.insert();
 
     }

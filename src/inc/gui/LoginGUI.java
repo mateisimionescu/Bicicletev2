@@ -24,7 +24,7 @@ public class LoginGUI extends JFrame{
     JLabel lblNume = new JLabel("Username:");
     JLabel lblParola = new JLabel ("Password:");
     JTextField txtUser = new JTextField(30);
-    JPasswordField txtPass = new JPasswordField(30);
+    JTextField txtPass = new JPasswordField(30);
     JButton btnLoginC = new JButton("Company Login");
     JButton btnLoginU = new JButton("User Login");
     JButton btnRegisterU=new JButton("User Register");
@@ -90,7 +90,7 @@ public class LoginGUI extends JFrame{
         DBconn connection = new DBconn();
         String tempUser = txtUser.getText();
         String tempPass = txtPass.getText();
-
+        JOptionPane.showMessageDialog(this, tempUser+" "+tempPass);
         try {
             String query = "SELECT username, password FROM " + Table + " WHERE username = ? AND password = ?;";
 
@@ -118,7 +118,7 @@ public class LoginGUI extends JFrame{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(!txtUser.getText().isEmpty() && !txtPass.getPassword().toString().isEmpty()) {
+            if(!txtUser.getText().isEmpty() && !txtPass.getText().isEmpty()) {
                 if (e.getSource() == btnLoginU) {
                     if (ServerAuth(btnLoginU.getName()) == true) ;
                     {
