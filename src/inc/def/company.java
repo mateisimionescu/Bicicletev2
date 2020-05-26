@@ -1,3 +1,5 @@
+package inc.def;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -27,6 +29,16 @@ public class company {
         phone = input.nextLine();
         System.out.println("Address:");
         address = input.nextLine();
+    }
+
+    public void set(String username_, String password_, String name_, String email_, String phone_, String address_)
+    {
+        username=username_;
+        password=password_;
+        name=name_;
+        email=email_;
+        phone=phone_;
+        address=address_;
     }
 
     public void insert() {
