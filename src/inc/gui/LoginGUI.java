@@ -90,7 +90,7 @@ public class LoginGUI extends JFrame{
         DBconn connection = new DBconn();
         String tempUser = txtUser.getText();
         String tempPass = txtPass.getText();
-        JOptionPane.showMessageDialog(this, tempUser+" "+tempPass);
+
         try {
             String query = "SELECT username, password FROM " + Table + " WHERE username = ? AND password = ?;";
 
@@ -120,23 +120,27 @@ public class LoginGUI extends JFrame{
         public void actionPerformed(ActionEvent e) {
             if(!txtUser.getText().isEmpty() && !txtPass.getText().isEmpty()) {
                 if (e.getSource() == btnLoginU) {
-                    if (ServerAuth(btnLoginU.getName()) == true) ;
+                    if (ServerAuth(btnLoginU.getName()) == true)
                     {
                         dispose();
                         UserGUI ug = new UserGUI();
                         ug.LoginWindow.setTitle("UserGUI");
                         LoginWindow.setVisible(false);
                     }
+                    else JOptionPane.showMessageDialog(LoginWindow, "Invalid username/password");
+
+
                 }
 
                 if (e.getSource() == btnLoginC) {
-                    if (ServerAuth(btnLoginC.getName()) == true) ;
+                    if (ServerAuth(btnLoginC.getName()) == true)
                     {
                         dispose();
                         CompanyGUI cg = new CompanyGUI();
                         cg.LoginWindow.setTitle("CompanyGUI");
                         LoginWindow.setVisible(false);
                     }
+                    else  JOptionPane.showMessageDialog(LoginWindow, "Invalid username/password");
                 }
             }
 
