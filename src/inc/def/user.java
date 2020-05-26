@@ -7,11 +7,20 @@ import inc.conn.DBconn;
 
 public class user {
     private int id_user;
-    private String username;
+    private String username = "Valoare";
     private String password;
     private String name;
     private String email;
     private String phone;
+
+    public user getUser(String username)
+    {
+        user tempUser = new user();
+
+
+
+        return tempUser;
+    }
 
     public void userInit() {
         System.out.println(this.getClass().getName());

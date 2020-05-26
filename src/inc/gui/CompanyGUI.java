@@ -13,6 +13,8 @@ public class CompanyGUI extends JFrame{
     static GridBagLayout gridBag = new GridBagLayout();
     static GridBagConstraints gbcons = new GridBagConstraints();
 
+
+
     static void CompAdd(Component comp, int x, int y, int w, int h){
         gbcons.gridx = x;
         gbcons.gridy = y;

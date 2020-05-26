@@ -1,8 +1,11 @@
 package inc.gui;
 
 
+
 import com.mysql.cj.log.Log;
 import inc.conn.DBconn;
+import inc.conn.Session;
+import inc.def.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -122,6 +125,10 @@ public class LoginGUI extends JFrame{
                 if (e.getSource() == btnLoginU) {
                     if (ServerAuth(btnLoginU.getName()) == true) {
                         dispose();
+
+                        user tempUser = new user();
+                        Session.setLoggedIn(tempUser);
+
                         UserGUI ug = new UserGUI();
                         ug.LoginWindow.setTitle("UserGUI");
                         LoginWindow.setVisible(false);
@@ -133,6 +140,10 @@ public class LoginGUI extends JFrame{
                 if (e.getSource() == btnLoginC) {
                     if (ServerAuth(btnLoginC.getName()) == true) {
                         dispose();
+
+                        company tempComp = new company();
+                        Session.setLoggedIn(tempComp);
+
                         CompanyGUI cg = new CompanyGUI();
                         cg.LoginWindow.setTitle("CompanyGUI");
                         LoginWindow.setVisible(false);
