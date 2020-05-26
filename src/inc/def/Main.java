@@ -1,3 +1,5 @@
+package inc.def;
+
 import inc.conn.DBconn;
 import inc.gui.LoginGUI;
 import inc.gui.RegisterU;

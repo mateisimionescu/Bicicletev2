@@ -60,13 +60,13 @@ public class LoginGUI extends JFrame{
        // CompAdd(btnLoginU, 0, 3, 0, 0);
         CompAdd(btnRegisterU,0,4,0,0);
         btnRegisterU.setName("ruser");
-        btnLoginU.setName("user");
+        btnLoginU.setName("inc.def.user");
         btnLoginU.addActionListener(lForButton);
 
 
         //gbcons.fill = GridBagConstraints.HORIZONTAL;
         //CompAdd(btnLoginC, 0, 10, 0, 0);
-        btnLoginC.setName("company");
+        btnLoginC.setName("inc.def.company");
         btnLoginC.addActionListener(lForButton);
 
 

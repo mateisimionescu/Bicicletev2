@@ -1,3 +1,5 @@
+package inc.def;
+
 import java.sql.*;
 import java.util.Scanner;
 import inc.conn.DBconn;
@@ -26,6 +28,15 @@ public class user {
         phone = input.nextLine();
     }
 
+    public void set(String username_, String password_, String name_, String email_, String phone_)
+    {
+        username=username_;
+        password=password_;
+        name=name_;
+        email=email_;
+        phone=phone_;
+    }
+
     public void insert() {
         System.out.println("Inserting records into the table...");
 
@@ -52,7 +63,7 @@ public class user {
 
     @Override
     public String toString() {
-        return "user{" +
+        return "inc.def.user{" +
                 "id_user=" + id_user +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +

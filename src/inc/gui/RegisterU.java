@@ -1,37 +1,36 @@
 package inc.gui;
 
 
-
 import com.mysql.cj.log.Log;
 import inc.conn.DBconn;
+import inc.def.user;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
-public class RegisterU extends JFrame {
+public class RegisterU extends JFrame{
 
-
-    static JFrame LoginWindow = new JFrame("Login Bikerino");
-    static GridBagLayout gridBag = new GridBagLayout();
+    static JFrame LoginWindow = new JFrame();
+    static GridBagLayout gridBag=new GridBagLayout();
     static GridBagConstraints gbcons = new GridBagConstraints();
 
+    JButton registerUser=new JButton("register");
+    JLabel lname=new JLabel("Name:");
+    JLabel lemail=new JLabel("Email:");
+    JLabel lphone=new JLabel("Phone:");
+    JLabel lusername=new JLabel("Username:");
+    JLabel lpassword=new JLabel("Password:");
+    JTextField tname=new JTextField(30);
+    JTextField tusername=new JTextField(30);
+    JTextField temail=new JTextField(30);
+    JTextField tphone=new JTextField(30);
+    JPasswordField tpassword=new JPasswordField(30);
+    JLabel inregistrare=new JLabel("INREGISTRARE USER");
+    JTextArea test=new JTextArea();
 
-    JLabel lblLogin = new JLabel("Bikerino", JLabel.CENTER);
-    JLabel lblNume = new JLabel("Username:");
-    JLabel lblParola = new JLabel("Password:");
-    JTextField txtUser = new JTextField(30);
-    JTextField txtPass = new JPasswordField(30);
-    JButton btnLoginC = new JButton("Company Login");
-    JButton btnLoginU = new JButton("User Login");
-    JButton btnRegisterU = new JButton("User Register");
-
-
-    static void CompAdd(Component comp, int x, int y, int w, int h) {
+    static void CompAdd(Component comp, int x, int y, int w, int h){
         gbcons.gridx = x;
         gbcons.gridy = y;
         gbcons.gridwidth = w;
@@ -41,24 +40,75 @@ public class RegisterU extends JFrame {
     }
 
 
-    public RegisterU() {
 
+
+    public RegisterU() {
+        ListenForButton listenForButton=new ListenForButton();
         LoginWindow.setSize(new Dimension(500, 500));
         LoginWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         LoginWindow.setVisible(true);
-        //LoginGUI.ListenForButton lForButton = new LoginGUI.ListenForButton();
-        gbcons.weightx = 0.5;
-        gbcons.weighty = 0.5;
-        gbcons.insets = new Insets(5, 5, 5, 5);
         LoginWindow.setLayout(gridBag);
+        gbcons.insets=new Insets(5,5,5,5);
+        CompAdd(inregistrare,0,0,3,3);
+        CompAdd(lusername,0,3,1,1);
+        CompAdd(tusername,1,3,1,1);
+        CompAdd(lpassword,0,4,1,1);
+        CompAdd(tpassword,1,4,1,1);
+        CompAdd(lname,0,5,1,1);
+        CompAdd(tname,1,5,1,1);
+        CompAdd(lemail,0,6,1,1);
+        CompAdd(temail,1,6,1,1);
+        CompAdd(lphone,0,7,1,1);
+        CompAdd(tphone,1,7,1,1);
+        CompAdd(test,0,10,2,2);
 
-        lblLogin.setFont(new Font("Arial", Font.BOLD, 24));
-        CompAdd(lblLogin, 0, 0, 4, 2);
 
-        CompAdd(lblNume, 0, 2, 1, 1);
-        CompAdd(lblParola, 0, 3, 1, 1);
-        CompAdd(txtUser, 1, 2, 2, 1);
-        CompAdd(txtPass, 1, 3, 2, 1);
+        gbcons.fill = GridBagConstraints.HORIZONTAL;
+        CompAdd(registerUser,0,8,2,2);
+        registerUser.setName("Inregistrare");
+
+        registerUser.addActionListener(listenForButton);
+
+
+
+
 
     }
+
+
+
+    private class ListenForButton implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(!filledData())
+                    test.setText("Date necompletate");
+            else
+                    test.setText("Inregistrat!");
+
+        }
+    }
+
+    private void insertData()
+    {
+        DBconn connection = new DBconn();
+        user temp=new user();
+        temp.set(tusername.getText(), (tpassword.getPassword()).toString(), tname.getText(),temail.getText(),tphone.getText());
+        temp.insert();
+
+    }
+
+    private boolean filledData()
+    {
+        if(tusername.getText().isEmpty() ||
+                tpassword.getText().isEmpty() ||
+                tname.getText().isEmpty() ||
+                temail.getText().isEmpty() ||
+                tphone.getText().isEmpty())
+            return false;
+        insertData();
+        return true;
+    }
+
+
 }
