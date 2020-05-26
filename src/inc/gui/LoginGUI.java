@@ -147,6 +147,13 @@ public class LoginGUI extends JFrame{
                     LoginWindow.setVisible(false);
                 }
 
+            if (e.getSource() == btnRegisterC) {
+                dispose();
+                RegisterC rc = new RegisterC();
+                rc.LoginWindow.setTitle("Register Company");
+                LoginWindow.setVisible(false);
+            }
+
 
         }
     }
