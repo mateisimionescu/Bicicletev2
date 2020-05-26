@@ -1,6 +1,6 @@
 package inc.def;
 
-public class Account {
+public abstract class Account {
     protected String username;
     protected String password;
     protected String name;
@@ -10,6 +10,8 @@ public class Account {
     public String getUsername() {
         return username;
     }
+
+    public abstract int getId();
 
     public String getName() {
         return name;

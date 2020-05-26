@@ -8,6 +8,11 @@ import inc.conn.DBconn;
 public class user extends Account {
     private int id_user;
 
+    public int getId()
+    {
+        return id_user;
+    }
+
     public void userInit() {
         System.out.println(this.getClass().getName());
         Scanner input = new Scanner(System.in);

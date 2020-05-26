@@ -11,6 +11,7 @@ public class bike {
     private String btype;
     private String name;
     private float price;
+    private boolean is_rented=false;
 
     public void bikeInit() {
         System.out.println(this.getClass().getName());
@@ -24,6 +25,80 @@ public class bike {
         name = input.nextLine();
         System.out.println("Price:");
         price = input.nextInt();
+
+    }
+
+    public void set(int id_bike_,int id_company_, String btype_, String name_, float price_, boolean is_rented_)
+    {
+        id_bike=id_bike_;
+        id_company=id_company_;
+        btype=btype_;
+        name=name_;
+        price=price_;
+        is_rented=is_rented_;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getType()
+    {
+        return btype;
+    }
+
+    public int getId()
+    {
+        return id_bike;
+    }
+
+    public int getId_company() {
+        return id_company;
+    }
+
+    public void setId_company(int id_company) {
+        this.id_company = id_company;
+    }
+
+    public String getBtype() {
+        return btype;
+    }
+
+    public void setBtype(String btype) {
+        this.btype = btype;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public boolean isIs_rented() {
+        return is_rented;
+    }
+
+    public void setIs_rented(boolean is_rented) {
+        this.is_rented = is_rented;
+    }
+
+    public int getId_bike() {
+        return id_bike;
+    }
+
+    public void setId_bike(int id_bike) {
+        this.id_bike = id_bike;
+    }
+
+    public String toString()
+    {
+        return name+" "+btype;
     }
 
     public void insert() {
