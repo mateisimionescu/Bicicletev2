@@ -72,66 +72,31 @@ public class LoginGUI extends JFrame{
         LoginWindow.setVisible(true);
     }
 
-    private boolean ServerAuth(String Table)
-    {
+    private boolean ServerAuth(String Table) {
         DBconn connection = new DBconn();
         String tempUser = txtUser.getText();
         String tempPass = txtPass.getText();
 
-        if (Table == "user")
-        {
-            try {
-                String query = "SELECT username, password FROM user WHERE username = ? AND password = ?;";
+        try {
+            String query = "SELECT username, password FROM " + Table + " WHERE username = ? AND password = ?;";
 
-                PreparedStatement preparedStmt = DBconn.getConnection().prepareStatement(query);
-                preparedStmt.setString (1, tempUser);
-                preparedStmt.setString (2, tempPass);
+            PreparedStatement preparedStmt = DBconn.getConnection().prepareStatement(query);
+            preparedStmt.setString(1, tempUser);
+            preparedStmt.setString(2, tempPass);
 
-                ResultSet rs = preparedStmt.executeQuery();
-                if(rs.next()){
-                    dispose();
-                    UserGUI ug = new UserGUI();
-                    ug.LoginWindow.setTitle(tempUser);
-                    LoginWindow.setVisible(false);
-                    return true;
-                }
-
-                return false;
-
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return false;
+            ResultSet rs = preparedStmt.executeQuery();
+            if (rs.next()) {
+                return true;
             }
 
+            return false;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
-        else if (Table == "company")
-        {
-            try {
-                String query = "SELECT username, password FROM company WHERE username = ? AND password = ?;";
-
-                PreparedStatement preparedStmt = DBconn.getConnection().prepareStatement(query);
-                preparedStmt.setString (1, tempUser);
-                preparedStmt.setString (2, tempPass);
-
-                ResultSet rs = preparedStmt.executeQuery();
-                if(rs.next()){
-                    dispose();
-                    CompanyGUI cg = new CompanyGUI();
-                    cg.LoginWindow.setTitle(tempUser);
-                    LoginWindow.setVisible(false);
-                    return true;
-                }
-
-                return false;
 
 
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return false;
-            }
-        }
-        else return false;
     }
 
 
@@ -142,12 +107,24 @@ public class LoginGUI extends JFrame{
 
             if (e.getSource() == btnLoginU)
             {
-                ServerAuth(btnLoginU.getName());
+                if(ServerAuth(btnLoginU.getName())==true);
+                {
+                    dispose();
+                    UserGUI ug = new UserGUI();
+                    ug.LoginWindow.setTitle("UserGUI");
+                    LoginWindow.setVisible(false);
+                }
             }
 
             if (e.getSource() == btnLoginC)
             {
-                ServerAuth(btnLoginC.getName());
+                if(ServerAuth(btnLoginC.getName())==true);
+                {
+                    dispose();
+                    CompanyGUI cg = new CompanyGUI();
+                    cg.LoginWindow.setTitle("CompanyGUI");
+                    LoginWindow.setVisible(false);
+                }
             }
 
         }
