@@ -14,7 +14,8 @@ public class CompanyGUI extends JFrame{
     static JFrame LoginWindow = new JFrame();
     static GridBagLayout gridBag = new GridBagLayout();
     static GridBagConstraints gbcons = new GridBagConstraints();
-    JLabel inregistrare=new JLabel("Bine ati venit, " + Session.getLoggedIn().getUsername() + "!");
+
+    JLabel inregistrare=new JLabel("Bine ati venit, " + Session.getLoggedIn().getName() + "!");
 
 
 
