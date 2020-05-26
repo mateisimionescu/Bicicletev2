@@ -27,6 +27,7 @@ public class LoginGUI extends JFrame{
     JTextField txtPass = new JPasswordField(30);
     JButton btnLoginC = new JButton("Company Login");
     JButton btnLoginU = new JButton("User Login");
+    JButton btnRegister = new JButton("Register");
 
 
     static void CompAdd(Component comp, int x, int y, int w, int h){
@@ -62,9 +63,13 @@ public class LoginGUI extends JFrame{
 
 
         gbcons.fill = GridBagConstraints.HORIZONTAL;
-        CompAdd(btnLoginC, 0, 5, 0, 0);
+        gbcons.anchor = GridBagConstraints.NORTH;
+        CompAdd(btnLoginC, 0, 4, 0, 0);
         btnLoginC.setName("company");
         btnLoginC.addActionListener(lForButton);
+
+        gbcons.anchor = GridBagConstraints.SOUTH;
+        CompAdd(btnRegister, 0, 5, 0, 0);
 
 
         LoginWindow.setSize(new Dimension(500, 500));
