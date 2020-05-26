@@ -31,6 +31,16 @@ public class company {
         address = input.nextLine();
     }
 
+    public void set(String username_, String password_, String name_, String email_, String phone_, String address_)
+    {
+        username=username_;
+        password=password_;
+        name=name_;
+        email=email_;
+        phone=phone_;
+        address=address_;
+    }
+
     public void insert() {
         System.out.println("Inserting records into the table...");
 
