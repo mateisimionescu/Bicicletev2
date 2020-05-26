@@ -25,6 +25,8 @@ public class CompanyGUI extends JFrame{
 
     public CompanyGUI() {
 
+
+
         LoginWindow.setSize(new Dimension(500, 500));
         LoginWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         LoginWindow.setVisible(true);

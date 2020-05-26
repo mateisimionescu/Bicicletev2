@@ -17,7 +17,7 @@ public class RegisterC extends JFrame{
     static GridBagLayout gridBag=new GridBagLayout();
     static GridBagConstraints gbcons = new GridBagConstraints();
 
-    JButton registerUser=new JButton("register");
+    JButton registerUser=new JButton("Register");
     JButton backToLogin=new JButton("Back to Login");
     JLabel lname=new JLabel("Name:");
     JLabel lemail=new JLabel("Email:");
