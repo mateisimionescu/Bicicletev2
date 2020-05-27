@@ -105,33 +105,8 @@ public class CompanyGUI extends JFrame{
     }
 
     private void addBike(){
-        int tempIDc = Session.getLoggedIn().getId();
-        String tempBtype = BtypeTXT.getText();
-        String tempName = BnameTXT.getText();
-        float SPrice = Float.parseFloat(BpriceTXT.getText());
-
-        System.out.println("Inserting records into the table...");
-
-        try {
-            String query = " insert into bike (id_company, btype, name, price)"
-                    + " values (?, ?, ?, ?)";
-
-            PreparedStatement preparedStmt = DBconn.getConnection().prepareStatement(query);
-            preparedStmt.setInt (1, tempIDc);
-            preparedStmt.setString (2, tempBtype);
-            preparedStmt.setString (3, tempName);
-            preparedStmt.setFloat (4, SPrice);
-
-            preparedStmt.execute();
-
-            bikeList();
-            ShowBikes();
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-        }
+        bike temp = new bike(Session.getLoggedIn().getId(),BtypeTXT.getText(),BnameTXT.getText(),Float.parseFloat(BpriceTXT.getText()));
+        temp.insert();
     }
 
     private void removeBike(){

@@ -13,21 +13,6 @@ public class bike {
     private float price;
     private boolean is_rented=false;
 
-    public void bikeInit() {
-        System.out.println(this.getClass().getName());
-        Scanner input = new Scanner(System.in);
-        System.out.println("Type:");
-        btype = input.nextLine();
-        System.out.println("Companie:");
-        id_company = input.nextInt();
-        input.nextLine();
-        System.out.println("Name:");
-        name = input.nextLine();
-        System.out.println("Price:");
-        price = input.nextInt();
-
-    }
-
     public void set(int id_bike_,int id_company_, String btype_, String name_, float price_, boolean is_rented_)
     {
         id_bike=id_bike_;
@@ -37,6 +22,16 @@ public class bike {
         price=price_;
         is_rented=is_rented_;
     }
+
+    public bike(int IDc, String type, String bname, float price)
+    {
+        this.id_company = IDc;
+        this.btype = type;
+        this.name = bname;
+        this.price = price;
+    }
+
+    public bike(){}
 
     public String getName() {
         return name;

@@ -15,23 +15,6 @@ public class company extends Account {
         return username;
     }
 
-    public void companyInit() {
-        System.out.println(this.getClass().getName());
-        Scanner input = new Scanner(System.in);
-        System.out.println("Username:");
-        username = input.nextLine();
-        System.out.println("Password:");
-        password = input.nextLine();
-        System.out.println("Name:");
-        name = input.nextLine();
-        System.out.println("E-mail:");
-        email = input.nextLine();
-        System.out.println("Phone:");
-        phone = input.nextLine();
-        System.out.println("Address:");
-        address = input.nextLine();
-    }
-
     public void set(String username_, String password_, String name_, String email_, String phone_, String address_)
     {
         username=username_;
