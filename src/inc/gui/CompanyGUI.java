@@ -3,11 +3,14 @@ package inc.gui;
 
 //import com.mysql.cj.log.Log;
 import com.mysql.cj.log.Log;
+import com.mysql.cj.xdevapi.DbDoc;
+import com.mysql.cj.xdevapi.Result;
 import inc.conn.DBconn;
 import inc.conn.Session;
-import inc.def.bike;
+import inc.def.*;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.awt.*;
@@ -36,6 +39,7 @@ public class CompanyGUI extends JFrame{
     private JButton backToMain = new JButton("Main Menu");
     private JButton backToMain2 = new JButton("Main Menu");
     private JButton backToMain3 = new JButton("Main Menu");
+    private JButton banUser = new JButton("Blocheaza User");
 
 
     //Bike menu
@@ -48,7 +52,16 @@ public class CompanyGUI extends JFrame{
     JLabel lblBtype = new JLabel("Type:");
     JLabel lblBname = new JLabel ("Name (Delete here):");
     JLabel lblBprice = new JLabel ("Price /h");
+    JComboBox users = new JComboBox();
+    ArrayList<user> allUsers=new ArrayList<>();
+    JLabel nrRented=new JLabel("Test");
 
+    JLabel startDate=new JLabel("Data inceput");
+    JLabel endDate=new JLabel("Data sfarsit");
+    JTextField startDateText=new JTextField(30);
+    JTextField endDateText=new JTextField(30);
+    JButton showNrBikes=new JButton("Numar bikes");
+    JLabel nrRentedDates=new JLabel("asd");
 
     static void CompAdd(JPanel tempPanel, Component comp, int x, int y, int w, int h){
         gbcons.gridx = x;
@@ -109,8 +122,7 @@ public class CompanyGUI extends JFrame{
         temp.insert();
     }
 
-    private void AllMenuGenerate()
-    {
+    private void AllMenuGenerate() throws SQLException {
         //Main Menu
         LoginWindow.add(MainMenu);
         CompAdd(MainMenu,WelcomeLabel,0,0,1,1);
@@ -142,15 +154,93 @@ public class CompanyGUI extends JFrame{
 
 
         //Review Menu
-        CompAdd(ReviewMenu,backToMain2,0,0,0,0);
+        reviewMenu();
+        CompAdd(ReviewMenu,nrRented,1,1,1,1);
+        CompAdd(ReviewMenu,backToMain2,1,6,1,1);
+        CompAdd(ReviewMenu, startDate,0,2,1,1);
+        CompAdd(ReviewMenu,startDateText,1,2,1,1);
+        CompAdd(ReviewMenu,endDate,0,3,1,1);
+        CompAdd(ReviewMenu,endDateText,1,3,1,1);
+        CompAdd(ReviewMenu,showNrBikes,1,4,1,1);
+        CompAdd(ReviewMenu,nrRentedDates,1,5,1,1);
 
         //Block Menu
-        CompAdd(BlockMenu,backToMain3,0,0,0,0);
+        CompAdd(BlockMenu,users,0,0,2,2);
+        CompAdd(BlockMenu,banUser,0,2,1,1);
+        CompAdd(BlockMenu,backToMain3,0,3,1,1);
     }
 
+    public void reviewMenu() throws SQLException {
+        int nrinchiriat;
+        String query="select count(id_bike) as nr from bike where is_rented=true;";
+        PreparedStatement p= DBconn.getConnection().prepareStatement(query);
+        ResultSet rs=p.executeQuery();
+        rs.next();
+        nrinchiriat=rs.getInt("nr");
+        nrRented.setText("In acest moment sunt inchiriate "+nrinchiriat+" biciclete.");
+
+    }
+
+    public void nrBikes() throws SQLException {
+        if(startDateText.getText().isEmpty() || endDateText.getText().isEmpty()) return;
 
 
-    public CompanyGUI() {
+        String query="Select count(id_rental) as nr from rental where rent_date between  ? and ?;";
+        PreparedStatement p=DBconn.getConnection().prepareStatement(query);
+        p.setString(1,startDateText.getText());
+        p.setString(2,endDateText.getText());
+        ResultSet rs=p.executeQuery();
+        rs.next();
+        int nrinchiriat=rs.getInt("nr");
+        nrRentedDates.setText("Intre cele doua date au fost inchiriate "+nrinchiriat+" biciclete");
+    }
+
+    public void addUsers()
+    {
+
+            DBconn connection = new DBconn();
+            users.removeAllItems();
+            allUsers.clear();
+
+
+
+            try {
+                String query = "SELECT username,name FROM user;";
+
+                PreparedStatement preparedStmt = DBconn.getConnection().prepareStatement(query);
+
+
+                ResultSet rs = preparedStmt.executeQuery();
+                while (rs.next()) {
+                    String tempUser=rs.getString(("username"));
+                    String tempName=rs.getString("name");
+
+                    user u=new user();
+                    u.setName(tempUser);
+                    u.setUsername(tempName);
+                    allUsers.add(u);
+
+
+                }
+
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+
+            }
+
+            for(user u:allUsers)
+            {
+                users.addItem(u.getName()+" "+u.getUsername());
+            }
+
+
+        }
+
+
+
+
+    public CompanyGUI() throws SQLException {
         gbcons.insets=new Insets(5,5,5,5);
         ListenForButton listenForButton = new ListenForButton();
         AllMenuGenerate();
@@ -169,6 +259,18 @@ public class CompanyGUI extends JFrame{
         backToMain3.addActionListener(listenForButton);
         addBikeBtn.addActionListener(listenForButton);
         removeBikeBtn.addActionListener(listenForButton);
+        banUser.addActionListener(listenForButton);
+        showNrBikes.addActionListener(listenForButton);
+        addUsers();
+    }
+
+    public void banUser(String name) throws SQLException {
+        String query="update user set is_banned=true where username=?;";
+
+        PreparedStatement p=DBconn.getConnection().prepareStatement(query);
+        p.setString(1,name);
+        p.execute();
+
     }
 
     private class ListenForButton implements ActionListener{
@@ -210,6 +312,24 @@ public class CompanyGUI extends JFrame{
 
             if (e.getSource().equals(removeBikeBtn)){
                 bike.removeBikeWithName(BnameTXT.getText());
+            }
+
+            if(e.getSource().equals(banUser))
+            {
+                try {
+                    banUser(allUsers.get(users.getSelectedIndex()).getName());
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+
+            if(e.getSource().equals(showNrBikes))
+            {
+                try {
+                    nrBikes();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
             }
 
         }

@@ -35,6 +35,7 @@ public class LoginGUI extends JFrame{
     user userTemp=new user();
     company companyTemp=new company();
 
+
     static void CompAdd(Component comp, int x, int y, int w, int h){
         gbcons.gridx = x;
         gbcons.gridy = y;
@@ -96,7 +97,7 @@ public class LoginGUI extends JFrame{
         String tempPass = txtPass.getText();
 
         try {
-            String query = "SELECT username, password FROM " + Table + " WHERE username = ? AND password = ?;";
+            String query = "SELECT username, password, is_banned FROM " + Table + " WHERE username = ? AND password = ?;";
 
             PreparedStatement preparedStmt = DBconn.getConnection().prepareStatement(query);
             preparedStmt.setString(1, tempUser);
@@ -104,8 +105,15 @@ public class LoginGUI extends JFrame{
 
             ResultSet rs = preparedStmt.executeQuery();
             if (rs.next()) {
+                boolean banned = rs.getBoolean("is_banned");
+                if(banned)
+                {
+                    JOptionPane.showMessageDialog(LoginWindow, "User blocat!");
+                    return false;
+                }
                 return true;
             }
+            else JOptionPane.showMessageDialog(LoginWindow, "Invalid username/password");
 
             return false;
 
@@ -133,7 +141,7 @@ public class LoginGUI extends JFrame{
                         UserGUI ug = new UserGUI();
                         ug.LoginWindow.setTitle("UserGUI");
                         LoginWindow.setVisible(false);
-                    } else JOptionPane.showMessageDialog(LoginWindow, "Invalid username/password");
+                    }
 
 
                 }
@@ -145,7 +153,12 @@ public class LoginGUI extends JFrame{
                         companyTemp.setDB(txtUser.getText(), txtPass.getText());
                         Session.setLoggedIn(companyTemp);
 
-                        CompanyGUI cg = new CompanyGUI();
+                        CompanyGUI cg = null;
+                        try {
+                            cg = new CompanyGUI();
+                        } catch (SQLException throwables) {
+                            throwables.printStackTrace();
+                        }
                         cg.LoginWindow.setTitle("CompanyGUI");
                         LoginWindow.setVisible(false);
                     } else JOptionPane.showMessageDialog(LoginWindow, "Invalid username/password");

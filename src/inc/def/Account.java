@@ -16,4 +16,13 @@ public abstract class Account {
     public String getName() {
         return name;
     }
+    public void setName(String name_)
+    {
+        name=name_;
+    }
+
+    public void setUsername(String username_)
+    {
+        username=username_;
+    }
 }

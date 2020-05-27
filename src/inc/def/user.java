@@ -7,6 +7,7 @@ import inc.conn.DBconn;
 
 public class user extends Account {
     private int id_user;
+    private boolean banned;
 
     public int getId()
     {
@@ -90,7 +91,9 @@ public class user extends Account {
         }
     }
 
-
+    public boolean isBanned() {
+        return banned;
+    }
 
     @Override
     public String toString() {
@@ -103,4 +106,6 @@ public class user extends Account {
                 ", phone='" + phone + '\'' +
                 '}';
     }
+
+
 }
