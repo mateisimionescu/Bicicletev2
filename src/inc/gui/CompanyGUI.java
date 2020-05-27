@@ -109,26 +109,6 @@ public class CompanyGUI extends JFrame{
         temp.insert();
     }
 
-    private void removeBike(){
-        String tempName = BnameTXT.getText();
-        try {
-            String query = "DELETE FROM bike WHERE name = ?";
-            System.out.println(query);
-            PreparedStatement preparedStmt = DBconn.getConnection().prepareStatement(query);
-            preparedStmt.setString (1, tempName);
-
-            preparedStmt.execute();
-
-            bikeList();
-            ShowBikes();
-
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-        }
-    }
-
     private void AllMenuGenerate()
     {
         //Main Menu
@@ -229,7 +209,7 @@ public class CompanyGUI extends JFrame{
             }
 
             if (e.getSource().equals(removeBikeBtn)){
-                removeBike();
+                bike.removeBikeWithName(BnameTXT.getText());
             }
 
         }

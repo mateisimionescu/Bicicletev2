@@ -117,4 +117,21 @@ public class bike {
 
         }
     }
+
+    static public void removeBikeWithName(String bname)
+    {
+        try {
+            String query = "DELETE FROM bike WHERE name = ?";
+            System.out.println(query);
+            PreparedStatement preparedStmt = DBconn.getConnection().prepareStatement(query);
+            preparedStmt.setString (1, bname);
+
+            preparedStmt.execute();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+    }
 }
