@@ -79,6 +79,12 @@ public class bike {
         return is_rented;
     }
 
+    public String Is_rented() {
+        if(is_rented == false)
+                return "NO";
+        return "YES";
+    }
+
     public void setIs_rented(boolean is_rented) {
         this.is_rented = is_rented;
     }

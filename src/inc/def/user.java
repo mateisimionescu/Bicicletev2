@@ -91,6 +91,8 @@ public class user extends Account {
         }
     }
 
+
+
     public boolean isBanned() {
         return banned;
     }
@@ -106,6 +108,8 @@ public class user extends Account {
                 ", phone='" + phone + '\'' +
                 '}';
     }
+
+
 
 
 }

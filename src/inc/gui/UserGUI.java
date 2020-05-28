@@ -31,9 +31,11 @@ public class UserGUI extends JFrame{
     private JLabel returnBike=new JLabel("Returnati bicicleta");
     private JButton rentBikeButton=new JButton("Inchiriaza");
     private JButton returnBikeButton=new JButton("Returneaza");
-    private JButton history=new JButton("Istoric inchirieri");
+    private JLabel history=new JLabel("Istoric inchirieri");
     private JTable historyTable=new JTable(new DefaultTableModel());
-    int rentId;
+    private JTable rentalTable = new JTable(new DefaultTableModel());
+    private DefaultTableModel model = new DefaultTableModel();
+
     static void CompAdd(Component comp, int x, int y, int w, int h){
         gbcons.gridx = x;
         gbcons.gridy = y;
@@ -44,6 +46,65 @@ public class UserGUI extends JFrame{
     }
 
 
+    private ArrayList<rental>  rentalList() {
+        ArrayList<rental> rentalList = new ArrayList<>();
+
+        try {
+            String query = "SELECT * FROM rental WHERE id_user = " + Session.getLoggedIn().getId() + ";";
+
+            PreparedStatement preparedStmt = DBconn.getConnection().prepareStatement(query);
+            ResultSet rs = preparedStmt.executeQuery();
+
+
+            while(rs.next()){
+                rental tempRental = new rental();
+                tempRental.setId_rental(rs.getInt("id_rental"));
+                tempRental.setId_user(rs.getInt("id_user"));
+                tempRental.setId_bike(rs.getInt("id_bike"));
+                tempRental.setRent_date(rs.getString("rent_date"));
+                tempRental.setRent_hour(rs.getString("rent_hour"));
+                tempRental.setReturn_hour(rs.getString("return_hour"));
+                rentalList.add(tempRental);
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rentalList;
+
+    }
+
+    private void ShowRentals(){
+        ArrayList<rental> rentals = rentalList();
+
+        rentalTable = new JTable(0,4);
+        model = (DefaultTableModel)rentalTable.getModel();
+        System.out.println(rentalTable.getRowCount());
+
+        Object[] row = new Object[4];
+
+        row[0]="Id_bike";
+        row[1]="Rent date";
+        row[2]="Rent hour";
+        row[3]="Return hour";
+        model.addRow(row);
+
+        for(int i=0;i<rentals.size();i++){
+            row[0]=rentals.get(i).getId_bike();
+            row[1]=rentals.get(i).getRent_date();
+            row[2]=rentals.get(i).getRent_hour();
+            row[3]=rentals.get(i).getReturn_hour();
+            System.out.println(row[0]);
+            if(row[0]!=null)
+                model.addRow(row);
+
+        }
+
+        for(int i=0;i<model.getRowCount();i++)
+            if(model.getValueAt(i,0)==null) {model.removeRow(i); i=0;}
+
+    }
 
 
     public UserGUI() {
@@ -59,25 +120,18 @@ public class UserGUI extends JFrame{
         CompAdd(returnBikeButton,2,4,1,1);
         CompAdd(history,1,5,1,1);
 
-
-
-
-
-        /*combo.addItem("bikikleta");
-        combo.addItem("bicikleta");
-        combo.addItem("bikiklet");
-        combo.addItem("bikikleta");*/
+        rentalList();
+        ShowRentals();
+        CompAdd(rentalTable,1,6,1,1);
         getBikes();
 
 
-        LoginWindow.setSize(new Dimension(500, 500));
+        LoginWindow.setSize(new Dimension(1000, 600));
         LoginWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         LoginWindow.setVisible(true);
 
         rentBikeButton.addActionListener(listenForButton);
         returnBikeButton.addActionListener(listenForButton);
-        history.addActionListener(listenForButton);
-
 
     }
 
@@ -137,7 +191,6 @@ public class UserGUI extends JFrame{
         public void actionPerformed(ActionEvent e) {
             if(e.getSource()==rentBikeButton)
             {
-                //combo.addItem("dsa"+combo.getSelectedIndex());
 
                 try {
                     String query = " update bike set is_rented=true where id_bike = ? ";
@@ -145,20 +198,15 @@ public class UserGUI extends JFrame{
                     preparedStmt.setInt (1, bikes.get(combo.getSelectedIndex()).getId());
                     preparedStmt.execute();
 
-                    String query2= " insert into rental(id_user,id_bike,rent_date,rent_hour) values( ?, ?, ?, ?); ";
+                    String query2= " insert into rental(id_user,id_bike,rent_date,rent_hour) values( ?, ?, SYSDATE(), CURRENT_TIMESTAMP() ); ";
                     PreparedStatement prepStmt=DBconn.getConnection().prepareStatement(query2);
 
                     prepStmt.setInt(1,Session.getLoggedIn().getId());
                     prepStmt.setInt(2, bikes.get(combo.getSelectedIndex()).getId());
-                    prepStmt.setString(3, "2020-05-22");
-                    prepStmt.setString(4,"14:30");
+                    //prepStmt.setString(3, "2020-05-22");
+                    //prepStmt.setString(3,"14:30");
 
                     prepStmt.execute();
-
-
-
-
-
 
                 } catch (SQLException f) {
                     f.printStackTrace();
@@ -166,6 +214,8 @@ public class UserGUI extends JFrame{
                 }
 
                 getBikes();
+                rentalList();
+                ShowRentals();
 
             }
 
@@ -177,19 +227,15 @@ public class UserGUI extends JFrame{
                     preparedStmt.setInt (1, ownedBikes.get(combo2.getSelectedIndex()).getId());
                     preparedStmt.execute();
 
-                    String query2= " update rental set return_hour='20:00' where id_user= ? and id_bike= ? ";
+                    String query2= " update rental set return_hour=CURRENT_TIMESTAMP() where id_user= ? and id_bike= ? ";
                     PreparedStatement prepStmt=DBconn.getConnection().prepareStatement(query2);
                     prepStmt.setInt(1,Session.getLoggedIn().getId());
                     prepStmt.setInt(2,ownedBikes.get(combo2.getSelectedIndex()).getId());
 
-
                     prepStmt.execute();
 
                     getBikes();
-
-
-
-
+                    model.fireTableDataChanged();
 
 
                 } catch (SQLException f) {
@@ -197,12 +243,6 @@ public class UserGUI extends JFrame{
 
                 }
 
-            }
-
-            if(e.getSource()==history)
-            {
-                DefaultTableModel model = (DefaultTableModel) historyTable.getModel();
-                model.addRow(new Object[]{"Column 1", "Column 2", "Column 3"});
             }
 
 

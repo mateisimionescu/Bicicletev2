@@ -46,24 +46,25 @@ public class CompanyGUI extends JFrame{
     private JTable bikeTable = new JTable();
     private JButton addBikeBtn = new JButton("Add");
     private JButton removeBikeBtn = new JButton("Remove");
-    JTextField BtypeTXT=new JTextField(30);
-    JTextField BnameTXT=new JTextField(30);
-    JTextField BpriceTXT=new JTextField(30);
-    JLabel lblBtype = new JLabel("Type:");
-    JLabel lblBname = new JLabel ("Name (Delete here):");
-    JLabel lblBprice = new JLabel ("Price /h");
-    JComboBox users = new JComboBox();
-    ArrayList<user> allUsers=new ArrayList<>();
-    JLabel nrRented=new JLabel("Test");
+    private JTextField BtypeTXT=new JTextField(30);
+    private JTextField BnameTXT=new JTextField(30);
+    private JTextField BpriceTXT=new JTextField(30);
+    private JLabel lblBtype = new JLabel("Type:");
+    private JLabel lblBname = new JLabel ("Name (Delete here):");
+    private JLabel lblBprice = new JLabel ("Price /h");
+    private JComboBox users = new JComboBox();
+    private ArrayList<user> allUsers=new ArrayList<>();
+    private JLabel nrRented=new JLabel("Test");
 
-    JLabel startDate=new JLabel("Data inceput");
-    JLabel endDate=new JLabel("Data sfarsit");
-    JTextField startDateText=new JTextField(30);
-    JTextField endDateText=new JTextField(30);
-    JButton showNrBikes=new JButton("Numar bikes");
-    JLabel nrRentedDates=new JLabel("asd");
+    //Review menu
+    private JLabel startDate=new JLabel("Data inceput");
+    private JLabel endDate=new JLabel("Data sfarsit");
+    private JTextField startDateText=new JTextField(30);
+    private JTextField endDateText=new JTextField(30);
+    private JButton showNrBikes=new JButton("Numar bikes");
+    private JLabel nrRentedDates=new JLabel("");
 
-    static void CompAdd(JPanel tempPanel, Component comp, int x, int y, int w, int h){
+    private static void CompAdd(JPanel tempPanel, Component comp, int x, int y, int w, int h){
         gbcons.gridx = x;
         gbcons.gridy = y;
         gbcons.gridwidth = w;
@@ -106,32 +107,36 @@ public class CompanyGUI extends JFrame{
 
 
 
-        bikeTable = new JTable(bikes.size(),6);
+        bikeTable = new JTable(0,6);
         DefaultTableModel model = (DefaultTableModel)bikeTable.getModel();
         System.out.println(bikeTable.getRowCount());
 
         Object[] row = new Object[6];
+
+        row[0]="Id_bike";
+        row[1]="Id_company";
+        row[2]="Bike Type";
+        row[3]="Name";
+        row[4]="Price";
+        row[5]="Rented";
+        model.addRow(row);
+
         for(int i=0;i<bikes.size();i++){
             row[0]=bikes.get(i).getId_bike();
             row[1]=bikes.get(i).getId_company();
             row[2]=bikes.get(i).getBtype();
             row[3]=bikes.get(i).getName();
             row[4]=bikes.get(i).getPrice();
-            row[5]=bikes.get(i).isIs_rented();
+            row[5]=bikes.get(i).Is_rented();
             System.out.println(row[0]);
             if(row[0]!=null)
                  model.addRow(row);
             System.out.println(model.getValueAt(i,0));
-            //if(model.getValueAt(i,0)==null) model.removeRow(i);
 
         }
 
         for(int i=0;i<model.getRowCount();i++)
             if(model.getValueAt(i,0)==null) {model.removeRow(i); i=0;}
-
-
-
-        System.out.println(bikeTable.getRowCount());
 
     }
 
