@@ -103,8 +103,13 @@ public class CompanyGUI extends JFrame{
 
     private void ShowBikes(){
         ArrayList<bike> bikes = bikeList();
+
+
+
         bikeTable = new JTable(bikes.size(),6);
         DefaultTableModel model = (DefaultTableModel)bikeTable.getModel();
+        System.out.println(bikeTable.getRowCount());
+
         Object[] row = new Object[6];
         for(int i=0;i<bikes.size();i++){
             row[0]=bikes.get(i).getId_bike();
@@ -113,8 +118,21 @@ public class CompanyGUI extends JFrame{
             row[3]=bikes.get(i).getName();
             row[4]=bikes.get(i).getPrice();
             row[5]=bikes.get(i).isIs_rented();
-            model.addRow(row);
+            System.out.println(row[0]);
+            if(row[0]!=null)
+                 model.addRow(row);
+            System.out.println(model.getValueAt(i,0));
+            //if(model.getValueAt(i,0)==null) model.removeRow(i);
+
         }
+
+        for(int i=0;i<model.getRowCount();i++)
+            if(model.getValueAt(i,0)==null) {model.removeRow(i); i=0;}
+
+
+
+        System.out.println(bikeTable.getRowCount());
+
     }
 
     private void addBike(){
@@ -307,7 +325,12 @@ public class CompanyGUI extends JFrame{
             }
 
             if (e.getSource().equals(addBikeBtn)){
+                bikeTable.removeAll();
+
                 addBike();
+
+                bikeList();
+
             }
 
             if (e.getSource().equals(removeBikeBtn)){
