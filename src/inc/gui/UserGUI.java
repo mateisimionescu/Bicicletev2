@@ -214,8 +214,6 @@ public class UserGUI extends JFrame{
                 }
 
                 getBikes();
-                rentalList();
-                ShowRentals();
 
             }
 
@@ -235,7 +233,6 @@ public class UserGUI extends JFrame{
                     prepStmt.execute();
 
                     getBikes();
-                    model.fireTableDataChanged();
 
 
                 } catch (SQLException f) {
